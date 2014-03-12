@@ -21,5 +21,5 @@ values:
 
 ## Specifications
 
-{:.specs}
 1. [CSS Text Level 4](http://dev.w3.org/csswg/css-text-4/#text-space-collapse) [Editor’s Draft]
+{:.specs}
