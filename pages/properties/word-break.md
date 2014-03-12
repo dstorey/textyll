@@ -1,0 +1,30 @@
+---
+
+property: word-break
+
+introduced: CSS3
+
+support:
+    firefox: 15
+    safari: 3
+    opera: 15
+    chrome: 1
+    ie: 5
+
+specs:
+    - CSS4
+    - CSS3
+
+values:
+    normal:
+    break-all:
+    keep-all:
+        support:
+            firefox: 15
+            ie: 5
+
+---
+
+## Prefixes
+
+Internet Explorer optionally supports the -ms- prefix since version 8.

@@ -1,0 +1,38 @@
+---
+
+property: line-break
+
+introduced: CSS3
+
+support:
+    safari: [6.1]
+    opera: [15]
+    chrome: [25]
+
+specs:
+    - CSS4
+    - CSS3
+
+values:
+    auto:
+    loose:
+    normal:
+        support:
+            safari: [2]
+            opera: [15]
+            chrome: [1]
+            ie: 5
+    strict:
+        support:
+            safari: [6.1]
+            opera: [15]
+            chrome: [25]
+            ie: 5
+
+---
+
+## Prefixes
+
+- Chrome, Opera, and Safari 3+ require the `-webkit-` prefix.
+- Safari 2 required the `-khtml-` prefix.
+- Internet Explorer optionally supports the `-ms-` prefix since version 8.
