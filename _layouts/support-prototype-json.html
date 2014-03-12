@@ -1,0 +1,16 @@
+{
+    "CSS Text": { {% if page.partials %}{% assign sorted_pages = site.pages | sort:'path' %}{% for item in sorted_pages %}{% if item.path contains page.partials %}
+        "{{ item.property }}": {
+            "values": { {% for value in item.values %}
+                "{{ value[0] }}": {
+                    "introduced": "{{ value | map:'introduced' }}",
+                    "support": { {% assign browsers = 'firefox,safari,opera,chrome,ie' | split:',' %}{% for browser in browsers %}
+                        {% assign support = value | map:'support' | map:browser %}{% if support[1] %}
+                        "{{ browser }}": "{{ support }}"{% else %}"{{ browser }}": false{% endif %}{% unless forloop.last %},{% endunless %}{% endfor %}
+                    }
+                }{% unless forloop.last %},{% endunless %}{% endfor %}
+            }
+        },
+{% endif %}{% endfor %}{% endif %}
+    }
+}
