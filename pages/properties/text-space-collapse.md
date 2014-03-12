@@ -2,21 +2,16 @@
 
 property: text-space-collapse
 
+introduced: CSS4
+
 values:
     collapse:
-        introduced: CSS4
     discard:
-        introduced: CSS4
     preserve:
-        introduced: CSS4
     preserve-breaks:
-        introduced: CSS4
     trim-inner:
-        introduced: CSS4
     consume-before:
-        introduced: CSS4
     consume-after:
-        introduced: CSS4
 ---
 
 ## Specifications

@@ -2,45 +2,27 @@
 
 property: text-transform
 
+introduced: CSS1
+
+support:
+    firefox: 1
+    safari: 1
+    opera: 3.5
+    chrome: 1
+    ie: 4
+
 values:
     none:
-        introduced: CSS1
-        support:
-            firefox: 1
-            safari: 1
-            opera: 3.5
-            chrome: 1
-            ie: 4
     capitalize:
-        introduced: CSS1
-        support:
-            firefox: 1
-            safari: 1
-            opera: 3.5
-            chrome: 1
-            ie: 4
     uppercase:
-        introduced: CSS1
-        support:
-            firefox: 1
-            safari: 1
-            opera: 3.5
-            chrome: 1
-            ie: 4
     lowercase:
-        introduced: CSS1
-        support:
-            firefox: 1
-            safari: 1
-            opera: 3.5
-            chrome: 1
-            ie: 4
     full-width:
         introduced: CSS3
         support:
             firefox: 19
     full-size-kana:
         introduced: CSS4
+        support: none
 
 ---
 

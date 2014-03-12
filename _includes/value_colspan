@@ -1,0 +1,12 @@
+{% capture value_colspan_null %}
+    {% if include.cell[forloop.index0] contains 'half-width' %}
+        {% assign not_half_width=false %}
+    {% else %}
+        {% assign not_half_width=true %}
+    {% endif %}
+    {% if half_widths[include.index] == 'true' and not_half_width == true %}
+        {% assign value_colspan_result = include.cell[forloop.index0] | replace_first:'>',' colspan="2">' %}
+    {% else %}
+        {% assign value_colspan_result = include.cell[forloop.index0] %}
+    {% endif %}
+{% endcapture %}{{ value_colspan_result }}

@@ -1,0 +1,22 @@
+{% capture value_support_null %}
+    {% assign support_string = value_support | map:include.browser | first %}
+    {% assign half_width_part = 'false' %}
+    {% if support_string %}
+        {% capture support_string_test %}{{ support_string | prepend:'' }}{% endcapture %}
+        {% if support_string_test contains ']' %}
+            {% assign support_string_size = support_string | size %}
+            {% if support_string_size == 1 %}
+                {% assign support_string = prefixed_template | replace:'%s',support_string[0] %}
+            {% else %}
+                {% assign half_width_part = 'true' %}
+                {% assign support_string = half_width_template | replace_first:'%s',support_string[0]  | replace_first:'%s',support_string[1] %}
+            {% endif %}
+        {% else %}
+            {% assign support_string = supported_template | replace:'%s',support_string %}
+        {% endif %}
+    {% else %}
+        {% assign support_string = unsupported_template %}
+    {% endif %}
+
+    {% assign half_widths = half_widths | append:',,,' | append:half_width_part %}
+{% endcapture %}{{ include.prev }},,,{{ support_string }}

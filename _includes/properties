@@ -1,0 +1,16 @@
+{% capture properties_null %}
+    {% assign properties_indexes = '' %}
+    {% assign properties_names = '' %}
+    {% assign properties_introduced = '' %}
+
+    {% for item in site.pages %}
+        {% if item.values %}
+            {% assign properties_indexes = properties_indexes | append:',' | append:forloop.index0 %}
+            {% assign properties_names = properties_names | append:',' | append:item.property %}
+        {% endif %}
+    {% endfor %}
+
+    {% assign properties_indexes = properties_indexes | remove_first:',' | split:',' %}
+    {% assign properties_last_index = properties_indexes | last %}
+    {% assign properties_names = properties_names | remove_first:',' | split:',' %}
+{% endcapture %}

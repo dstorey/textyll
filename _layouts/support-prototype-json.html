@@ -1,16 +1,19 @@
-{
-    "CSS Text": { {% if page.partials %}{% assign sorted_pages = site.pages | sort:'path' %}{% for item in sorted_pages %}{% if item.path contains page.partials %}
+{ {% include properties %}
+    "CSS Text": { {% for item in site.pages %}{% if item.path contains page.partials %}{% include values index=forloop.index0 supported_template='"%s"' unsupported_template='false' prefixed_template='{ "prefixed": "%s" }' half_width_template='{ "prefixed": "%s", "unprefixed": "%s" }' %}
         "{{ item.property }}": {
-            "values": { {% for value in item.values %}
-                "{{ value[0] }}": {
-                    "introduced": "{{ value | map:'introduced' }}",
-                    "support": { {% assign browsers = 'firefox,safari,opera,chrome,ie' | split:',' %}{% for browser in browsers %}
-                        {% assign support = value | map:'support' | map:browser %}{% if support[1] %}
-                        "{{ browser }}": "{{ support }}"{% else %}"{{ browser }}": false{% endif %}{% unless forloop.last %},{% endunless %}{% endfor %}
+            "values": { {% for value in values_names %}
+                "{{ value | replace:'&lt;','<' }}": {
+                    "introduced": "{{ values_introduced[forloop.index0] }}",
+                    "support": {
+                        "firefox": {{ support_firefox[forloop.index0] }},
+                        "safari": {{ support_safari[forloop.index0] }},
+                        "opera": {{ support_opera[forloop.index0] }},
+                        "chrome": {{ support_chrome[forloop.index0] }},
+                        "ie": {{ support_ie[forloop.index0] }}
                     }
                 }{% unless forloop.last %},{% endunless %}{% endfor %}
             }
-        },
-{% endif %}{% endfor %}{% endif %}
+        }{% assign index = '' | append:forloop.index0 %}{% unless index == properties_last_index %},{% endunless %}
+{% endif %}{% endfor %}
     }
 }

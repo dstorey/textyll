@@ -24,8 +24,7 @@
     {% assign partials_result = '' %}
     {% assign partials_toc_result = '' %}
     {% if page.partials %}
-        {% assign sorted_pages = site.pages | sort:'path' %}
-        {% for item in sorted_pages %}
+        {% for item in site.pages %}
             {% if item.path contains page.partials %}
                 {% assign item_id = item.path | split:'/' | last | remove:'.md' %}
                 {% capture partials_raw_content %}
@@ -33,36 +32,33 @@
 {% endcapture %}
                 {% capture partials_toc_result %}{{ partials_toc_result }}{{ partials_raw_content }}{% endcapture %}
 
+                {% include values index=forloop.index0 supported_template='<td class="supported">%s</td>' unsupported_template='<td class="unsupported">No</td>' prefixed_template='<td class="prefixed">%s</td>' half_width_template='<td class="prefixed half-width">%s</td><td class="supported half-width">%s</td>' %}
+                {% assign half_widths = half_widths | remove_first:',,,' | split:',,,' %}
+
                 {% capture partials_raw_content %}
-{% unless partials_input.partials_no_ids %}{:#{{ item_id }}}{% endunless %}
-<table>
+<table id="{{ item_id }}">
     <caption><code>{{ item.property }}</code> property</caption>
     <thead>
         <tr>
             <th rowspan="2">Value</th>
             <th rowspan="2">Introduced</th>
-            <th colspan="5">Support</th>
+            <th colspan="10">Support</th>
         </tr>
         <tr class="browsers">
-            <th><span>Firefox</span></th>
-            <th><span>Safari</span></th>
-            <th><span>Opera</span></th>
-            <th><span>Chrome</span></th>
-            <th><span>IE</span></th>
-        </tr>
-        {% for value in item.values %}
-        <tr>
-            <td><code>{{ value[0] }}</code></td>
-            <td>{{ value | map:'introduced' }}</td>
-            {% assign browsers = 'firefox,safari,opera,chrome,ie' | split:',' %}
+            {% assign browsers = 'Firefox, Safari, Opera, Chrome, IE' | split:', ' %}
             {% for browser in browsers %}
-                {% assign support = value | map:'support' | map:browser %}
-                {% if support[1] %}
-                    <td class="supported">{{ support }}</td>
-                {% else %}
-                    <td class="unsupported">No</td>
-                {% endif %}
+            <th{% if half_widths[forloop.index0] == 'true' %} colspan="2"{% endif %}><span>{{ browser }}</span></th>
             {% endfor %}
+        </tr>
+        {% for value in values_names %}
+        <tr>
+            <td>{% if value contains '>' %}<var>{{ value }}</var>{% else %}<code>{{ value }}</code>{% endif %}</td>
+            <td>{{ values_introduced[forloop.index0] }}</td>
+            {% include value_colspan cell=support_firefox index=0 %}
+            {% include value_colspan cell=support_safari index=1 %}
+            {% include value_colspan cell=support_opera index=2 %}
+            {% include value_colspan cell=support_chrome index=3 %}
+            {% include value_colspan cell=support_ie index=4 %}
         </tr>
         {% endfor %}
     </thead>

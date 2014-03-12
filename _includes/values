@@ -1,0 +1,70 @@
+{% capture values_null %}
+    {% assign values_names = '' %}
+    {% assign values_introduced = '' %}
+    {% assign support_firefox = '' %}
+    {% assign support_safari = '' %}
+    {% assign support_opera = '' %}
+    {% assign support_chrome = '' %}
+    {% assign support_ie = '' %}
+
+    {% assign half_widths = '' %}
+
+    {% for property in site.pages %}
+        {% capture index_loop %}{{ forloop.index0 }}{% endcapture %}
+        {% capture index_include %}{{ include.index }}{% endcapture %}
+        {% if index_loop == index_include %}
+            {% for value in property.values %}
+                {% assign values_names = values_names | append:',,,' | append:value[0] | replace:'<','&lt;' %}
+
+                {% assign value_introduced = value | map:'introduced' %}
+                {% if value_introduced[1] %}
+                    {% assign value_introduced = value_introduced[1] %}
+                {% else %}
+                    {% assign value_introduced = property.introduced %}
+                {% endif %}
+                {% assign values_introduced = values_introduced | append:',,,' | append:value_introduced %}
+
+                {% assign value_support = value | map:'support' %}
+                {% if value_support[1] %}
+                    {% assign value_support = value_support[1] %}
+                {% else %}
+                    {% assign value_support = property.support %}
+                {% endif %}
+
+                {% assign supported_template = '%s' %}
+                {% if include.supported_template %}
+                    {% assign supported_template = include.supported_template %}
+                {% endif %}
+
+                {% assign prefixed_template = '%s' %}
+                {% if include.prefixed_template %}
+                    {% assign prefixed_template = include.prefixed_template %}
+                {% endif %}
+
+                {% assign half_width_template = '%s, %s' %}
+                {% if include.half_width_template %}
+                    {% assign half_width_template = include.half_width_template %}
+                {% endif %}
+
+                {% assign unsupported_template = '%s' %}
+                {% if include.unsupported_template %}
+                    {% assign unsupported_template = include.unsupported_template %}
+                {% endif %}
+
+                {% capture support_firefox %}{% include value_support prev=support_firefox browser='firefox' %}{% endcapture %}
+                {% capture support_safari %}{% include value_support prev=support_safari browser='safari' %}{% endcapture %}
+                {% capture support_opera %}{% include value_support prev=support_opera browser='opera' %}{% endcapture %}
+                {% capture support_chrome %}{% include value_support prev=support_chrome browser='chrome' %}{% endcapture %}
+                {% capture support_ie %}{% include value_support prev=support_ie browser='ie' %}{% endcapture %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+    {% assign values_names = values_names | remove_first:',,,' | split:',,,' %}
+    {% assign values_introduced = values_introduced | remove_first:',,,' | split:',,,' %}
+    {% assign support_firefox = support_firefox | remove_first:',,,' | split:',,,' %}
+    {% assign support_safari = support_safari | remove_first:',,,' | split:',,,' %}
+    {% assign support_opera = support_opera | remove_first:',,,' | split:',,,' %}
+    {% assign support_chrome = support_chrome | remove_first:',,,' | split:',,,' %}
+    {% assign support_ie = support_ie | remove_first:',,,' | split:',,,' %}
+{% endcapture %}
