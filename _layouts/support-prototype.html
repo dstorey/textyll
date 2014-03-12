@@ -51,6 +51,8 @@
             <th{% if half_widths[forloop.index0] == 'true' %} colspan="2"{% endif %}><span>{{ browser }}</span></th>
             {% endfor %}
         </tr>
+    </thead>
+    <tbody>
         {% for value in values_names %}
         <tr>
             <td>{% if value contains '>' %}<var>{{ value }}</var>{% else %}<code>{{ value }}</code>{% endif %}</td>
@@ -62,7 +64,7 @@
             {% include value_colspan cell=support_ie index=4 %}
         </tr>
         {% endfor %}
-    </thead>
+    </tbody>
 </table>
 
 {% if item.specs %}
