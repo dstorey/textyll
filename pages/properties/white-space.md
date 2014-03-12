@@ -11,6 +11,12 @@ support:
     chrome: 1
     ie: 5.5
 
+specs:
+    - CSS4
+    - CSS3
+    - CSS2.1
+    - CSS1
+
 values:
     normal:
     nowrap:
@@ -39,14 +45,6 @@ values:
             ie: 8
 
 ---
-
-## Specifications
-
-1. [CSS Text Level 4](http://dev.w3.org/csswg/css-text-4/#white-space) [Editor’s Draft]
-2. [CSS Text Level 3](http://dev.w3.org/csswg/css-text/#white-space) [Editor’s Draft]
-3. [CSS Level 2 Revision 1, Text](http://www.w3.org/TR/CSS2/text.html#propdef-white-space) [Recommendation]
-4. [CSS Level 1, Text](http://www.w3.org/TR/REC-CSS1/#white-space) [Recommendation]
-{:.specs}
 
 ## Prefixes
 

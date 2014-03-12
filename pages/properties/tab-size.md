@@ -4,6 +4,10 @@ property: tab-size
 
 introduced: CSS3
 
+specs:
+    - CSS4
+    - CSS3
+
 values:
     <integer>:
         support:
@@ -13,12 +17,6 @@ values:
             chrome: 21
     <length>:
 ---
-
-## Specifications
-
-1. [CSS Text Level 4](http://dev.w3.org/csswg/css-text-4/#tab-size) [Editor’s Draft]
-2. [CSS Text Level 3](http://dev.w3.org/csswg/css-text/#tab-size) [Editor’s Draft]
-{:.specs}
 
 ## Prefixes
 

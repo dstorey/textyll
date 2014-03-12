@@ -4,6 +4,9 @@ property: text-space-collapse
 
 introduced: CSS4
 
+specs:
+    - CSS4
+
 values:
     collapse:
     discard:
@@ -13,8 +16,3 @@ values:
     consume-before:
     consume-after:
 ---
-
-## Specifications
-
-1. [CSS Text Level 4](http://dev.w3.org/csswg/css-text-4/#text-space-collapse) [Editor’s Draft]
-{:.specs}

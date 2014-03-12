@@ -37,8 +37,6 @@
 
                 {% capture partials_raw_content %}
 
-{{ half_widths }}
-
 <table id="{{ item_id }}">
     <caption><code>{{ item.property }}</code> property</caption>
     <thead>
@@ -66,6 +64,18 @@
         {% endfor %}
     </thead>
 </table>
+
+{% if item.specs %}
+<h2>Specifications</h2>
+<ol class="specs">
+{% for spec in item.specs %}
+    <li>
+        <a href="{{ site.data.specs.Text | map:spec | map:'link' | first | replace:'%s',item.property }}">{{ site.data.specs.Text | map:spec | map:'name' }}</a>
+        [{{ site.data.specs.Text | map:spec | map:'status' }}]
+    </li>
+{% endfor %}
+</li>
+{% endif %}
 
 {{ item.content }}
 
