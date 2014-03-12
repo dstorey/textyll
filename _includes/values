@@ -7,7 +7,7 @@
     {% assign support_chrome = '' %}
     {% assign support_ie = '' %}
 
-    {% assign half_widths = '' %}
+    {% assign half_widths = 'firefox, safari, opera, chrome, ie' %}
 
     {% for property in site.pages %}
         {% capture index_loop %}{{ forloop.index0 }}{% endcapture %}

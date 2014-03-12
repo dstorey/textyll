@@ -33,9 +33,12 @@
                 {% capture partials_toc_result %}{{ partials_toc_result }}{{ partials_raw_content }}{% endcapture %}
 
                 {% include values index=forloop.index0 supported_template='<td class="supported">%s</td>' unsupported_template='<td class="unsupported">No</td>' prefixed_template='<td class="prefixed">%s</td>' half_width_template='<td class="prefixed half-width">%s</td><td class="supported half-width">%s</td>' %}
-                {% assign half_widths = half_widths | remove_first:',,,' | split:',,,' %}
+                {% assign half_widths = half_widths | split:', ' %}
 
                 {% capture partials_raw_content %}
+
+{{ half_widths }}
+
 <table id="{{ item_id }}">
     <caption><code>{{ item.property }}</code> property</caption>
     <thead>
