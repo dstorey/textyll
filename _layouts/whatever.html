@@ -1,0 +1,14 @@
+<!DOCTYPE html>{% include setup.md %}
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width"/>
+
+    <title>{{ title }}</title>
+</head>
+<body>
+    {% if title %}<h1>{{ title }}</h1>{% endif %}
+    {{ processed_content }}
+</body>
+</html>
+

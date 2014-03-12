@@ -1,10 +1,8 @@
 ---
 
-layout: default
+layout: whatever
 
 permalink: /
-
-partials: "partial_"
 
 ---
 

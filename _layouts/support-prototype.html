@@ -1,0 +1,93 @@
+<!DOCTYPE html>{% include setup.md %}
+<html class="page{{ page_lang_class }}{{ page_type_class }}{{ page_category_class }}">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width"/>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7,IE=edge"/>
+    <link rel="stylesheet" href="{{ root_url }}s/support-prototype.css" /><!--[if gt IE 7]><!-->
+    <link rel="stylesheet" href="{{ root_url }}s/style.css" /><!--<![endif]--><!--[if lt IE 8]>
+    <link rel="stylesheet" href="{{ root_url }}s/style.ie.css" /><![endif]-->
+
+    <title>{{ title }}</title>
+</head>
+<body class="page-body">
+    <h1>{{ title }}</h1>
+    <aside id="toc">
+        <h2>Specifications</h2>
+        <ul>
+            <li><a href="http://www.w3.org/TR/css3-text/">Latest version</a></li>
+            <li><a href="http://dev.w3.org/csswg/css-text/">Editor's draft</a></li>
+        </ul>
+
+{% capture cache %}
+    {% assign partials_result = '' %}
+    {% assign partials_toc_result = '' %}
+    {% if page.partials %}
+        {% assign sorted_pages = site.pages | sort:'path' %}
+        {% for item in sorted_pages %}
+            {% if item.path contains page.partials %}
+                {% assign item_id = item.path | split:'/' | last | remove:'.md' %}
+                {% capture partials_raw_content %}
+            <li><a href="#{{ item_id }}">{{ item.property }}</a></li>
+{% endcapture %}
+                {% capture partials_toc_result %}{{ partials_toc_result }}{{ partials_raw_content }}{% endcapture %}
+
+                {% capture partials_raw_content %}
+{% unless partials_input.partials_no_ids %}{:#{{ item_id }}}{% endunless %}
+<table>
+    <caption><code>{{ item.property }}</code> property</caption>
+    <thead>
+        <tr>
+            <th rowspan="2">Value</th>
+            <th rowspan="2">Introduced</th>
+            <th colspan="5">Support</th>
+        </tr>
+        <tr class="browsers">
+            <th><span>Firefox</span></th>
+            <th><span>Safari</span></th>
+            <th><span>Opera</span></th>
+            <th><span>Chrome</span></th>
+            <th><span>IE</span></th>
+        </tr>
+        {% for value in item.values %}
+        <tr>
+            <td><code>{{ value[0] }}</code></td>
+            <td>{{ value | map:'introduced' }}</td>
+            {% assign browsers = 'firefox,safari,opera,chrome,ie' | split:',' %}
+            {% for browser in browsers %}
+                {% assign support = value | map:'support' | map:browser %}
+                {% if support[1] %}
+                    <td class="supported">{{ support }}</td>
+                {% else %}
+                    <td class="unsupported">No</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </thead>
+</table>
+
+{{ item.content }}
+
+                {% endcapture %}
+                {% capture partials_result %}{{ partials_result }}{{ partials_raw_content | markdownify | replace:'id="section"',id_replacement_0 | replace:'id="section-',id_replacement }}{% endcapture %}
+
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endcapture %}
+
+        <h2>Property List</h2>
+        <ul>
+            {{ partials_toc_result }}
+        </ul>
+
+    </aside>
+
+    {{ partials_result }}
+
+    <script src="{{ root_url }}j/script.js"></script>
+</body>
+</html>
+
